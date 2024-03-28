@@ -1,0 +1,28 @@
+JMeter - InfluxDB - Grafana Integration
+
+1. Go to InfluxDB folder and start influxd.exe
+2. Start influx.exe (It should show connected to http://localhost:8086)
+3. Write the commands - 
+ create database <database_name>
+ use <database_name>
+ create user root with password 'root'
+4. Go to Grafana folder and start grafana-server.exe
+5. Go to localhost:3000 on the browser
+Enter the username as admin and password as admin
+6. Click on add your first data source
+7. Select InfluxDB
+8. Enter the name as you want(APM) and enter the URL as http://localhost:8086
+9. Under InfluxDB details, enter the details -
+Database : <database_name> as created in step 3
+User : root as created in step 3
+Password : root as created in step 3
+HTTP method: GET
+10. Click on Save and test (It should show the data source is working)
+11. Go to JMeter script and add a backend listener in the thread group
+12. In the backend listener implementation section, select InfluxdbBackendListenerClient
+13. In parameters, edit InfluxdbURL as http://localhost:8086/write?db=<database_name>
+14. In Grafana, click the + sign to create/import a dashboard.
+15. Upload the json file and give dashboard name as you want (APM Dashboard) and enter db name as selected in step 8 (APM)
+16. Click on import.
+17. Select data source(APM) and application name(as in jmeter) and transaction name (as in jmeter) on the dashboard
+18. Start JMeter test and see the dashboard results

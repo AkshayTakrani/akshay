@@ -1,0 +1,33 @@
+On Master machine - 
+Open jmeter.properties file
+search remote_hosts and assign IP addresses of slaves
+eg - remote_hosts = 192.168.0.1
+
+Create a keystore file
+Open create-rmi-keystore.bat
+Enter First Name as rmi
+Enter the organizational unit
+Enter name of the organization
+Enter city
+Enter state
+Enter the country code
+Select yes from [yes/no]
+Enter password as - changeit
+A new file will be generated in JMeter's bin folder as - rmi_keystore.jks
+
+Run jmeter-server file on slave machine (remote machine)
+
+Open JMeter
+Create/Open a script (.jmx file)
+Run -> Remote start-> Select IP address
+
+Running from command line (Non GUI mode) - 
+jmeter.bat -n -t "Path of test script" -l "Path of csv file to log the results" -R 192.168.0.1 (ip add of slave)
+
+
+NOTE : 
+All machines should have same version of JMeter
+All machines should have same version of java installed
+All machines should be in the same subnet
+No need to copy .jmx file (script) into the slave machines.
+If you want to run with 100 users and have 2 slaves then give the no of users as 50 in each slave

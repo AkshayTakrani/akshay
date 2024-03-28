@@ -1,0 +1,44 @@
+Young Generation + Old Generation = Heap Memory
+
+Permenant generation = Non Heap memory
+
+Permanent Generation is available till Java JDK 7, from JDK 8, it is called as metaspace
+
+All newly created objects are stored in Eden.
+
+When eden gets full, the minor GC will kick in and it will delete the unused objects. The objects will move to survivor spaces
+
+The minor GC will happen very fast for short period of time.
+
+There is a JVM flag called MaxTenuringThreshold. The default value is 15. When an object survives 15 cycles,
+the flag MaxTenuringThreshold gets triggered and the object moves from young -> old generation.
+
+Classes, methods, static and constant variables are stored in metaspace.
+
+Metaspace can automatically increase its memory, but not permgen
+
+XMS - Initial heap size
+
+XMX - Max heap size
+
+https://dzone.com/articles/heap-memory-in-java-performance-testing
+
+Ways to take a heap dump
+
+1. Goto jconsole inside JDK -> bin folder and open it and select the processid/jar
+   Goto MBeans -> com.sun.management -> Hotspot Diagnostics -> Operations -> dumpHeap
+   Give the name of dump in p0 (ex - HeapDump.hprof) and click on dumpheap
+2. Get the Jar processid by running command jps
+   Run command jcmd to verify the processid with full path of jar file
+   Run the command : jcmd [processid] GC.heap_dump D:\APEHeapDump\jcmdheap.hprof
+3. Run the command : jmap -dump:format=b,file=D:\APEHeapDump\jmapheap.hprof [processid]
+4. Goto jvisualvm inside JDK -> bin folder and open it and select the processid/jar
+   Click on heap dump and it will create a heap dump on left hand pane
+   You can save it by right click -> save as -> [filename].jprof
+
+To see the heapdump, install a plugin in eclipse called as MAT (Memory Analyzer Tool)
+Click on File -> Open Heap Dump -> Select the heap dump file
+
+Online tools to view dumps
+Threaddump - https://www.fastthread.io
+Heapdump - https://www.heaphero.io
